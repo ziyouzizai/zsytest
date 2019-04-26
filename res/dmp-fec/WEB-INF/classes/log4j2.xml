@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status=debug 可以查看log4j的装配过程 -->
+<configuration status="info">
+	<!-- 定义全局变量以便使用 -->
+	<Properties>
+		<!-- <Property name="LOG_HOME">D:/\INTERFACELog/\2.0</Property> --><!--${sys:catalina.home}C:/userdesk/fec -->
+		<Property name="LOG_HOME">${sys:catalina.home}</Property>
+		<!-- 日志备份目录 -->
+		<Property name="INFO_NAME">info</Property>
+		<Property name="DEBUG_NAME">debug</Property>
+		<Property name="ERROR_NAME">error</Property>
+	</Properties>
+    <appenders>
+        <!-- 定义控制台输出 -->
+        <Console name="STDOUT">
+            <PatternLayout pattern="%d [%-5p] [%t] [%l] :%m%n" />
+        </Console>
+        <RollingFile name="stdout" fileName="${LOG_HOME}/logs/stdout.log" filePattern="${LOG_HOME}/logs/stdout.log.%d{yyyy-MM-dd}.%i">
+            <PatternLayout>
+                <Pattern>%d [%-5p] [%t] [%M(%F:%L)] :%m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" />
+                <SizeBasedTriggeringPolicy size="200MB" />
+                <OnStartupTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+        <RollingFile name="heartbeat" fileName="${LOG_HOME}/logs/heartbeat.log" filePattern="${LOG_HOME}/logs/heartbeat.log.%d{yyyy-MM-dd}.%i">
+            <PatternLayout>
+                <Pattern>%d [%-5p] [%t] [%M(%F:%L)] :%m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" />
+                <SizeBasedTriggeringPolicy size="200MB" />
+                <OnStartupTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="40" />
+        </RollingFile>
+        <RollingFile name="feedback" fileName="${LOG_HOME}/logs/feedback.log" filePattern="$${LOG_HOME}/logs/feedback-%d{yyyy-MM-dd}.%i.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd_HH:mm:ss},%m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" />
+                <SizeBasedTriggeringPolicy size="1000MB" />
+                <OnStartupTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="1000" />
+        </RollingFile>
+        <!--adxEffect回来的数据
+        <RollingFile name="adEffect" fileName="${sys:catalina.home}/logs/adEffect.log" filePattern="${sys:catalina.home}/logs/adEffect-%d{yyyy-MM-dd-HH}.%i.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd_HH:mm:ss},%m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" />
+                <SizeBasedTriggeringPolicy size="1000MB" />
+                <OnStartupTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="1000" />
+        </RollingFile>
+        <Async name="AsyncFeedBack" blocking="true" bufferSize="1048576">
+            <AppenderRef ref="feedback" />
+        </Async>-->
+        <!--adxEffect回来的数据
+        <Async name="AsyncAdEffect" blocking="true" bufferSize="8192">
+            <AppenderRef ref="adEffect" />
+        </Async>-->
+    </appenders>
+    <loggers>
+        <root level="INFO">
+            <appender-ref ref="STDOUT" />
+        </root>
+        <Logger name="com.reyun" level="INFO" additivity="false">
+            <AppenderRef ref="stdout" />
+        </Logger>
+        <Logger name="heartbeat" level="INFO" additivity="false">
+            <AppenderRef ref="heartbeat" />
+        </Logger>
+        
+        <!--adxEffect回来的数据
+        <AsyncLogger name="feedback" level="INFO" additivity="false">
+            <AppenderRef ref="AsyncFeedBack" />
+        </AsyncLogger>
+        <AsyncLogger name="adEffect" level="INFO" additivity="false">
+            <AppenderRef ref="AsyncAdEffect" />
+        </AsyncLogger>-->
+    </loggers>
+</configuration>

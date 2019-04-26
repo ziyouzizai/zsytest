@@ -1,0 +1,606 @@
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class HttpClientUtil {
+    public static String getContent(String url, Map<String, String> heads, String charset, String method) throws Exception {
+        URL httpUrl = new URL(url);
+        HttpURLConnection httpURLConnection = (HttpURLConnection) httpUrl.openConnection(); ;
+        if (heads != null) {
+            for (Map.Entry entry : heads.entrySet()) {
+                httpURLConnection.setRequestProperty((String) entry.getKey(), (String) entry.getValue());
+            }
+        }
+        httpURLConnection.setRequestMethod(method);
+        httpURLConnection.setDoInput(true);
+        httpURLConnection.setInstanceFollowRedirects(true);
+        httpURLConnection.connect();
+
+        String result = "";
+        BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(), charset));
+        String line;
+        while ((line = in.readLine()) != null) {
+            result += line;
+        }
+        return result;
+    }
+
+    public static void main(String[] args) throws Exception {
+//    	process();
+//    	sure();
+    	test1203();
+    }
+    
+    public static void test1203() {
+    	virefy("4650154","beb120b94640389e1143dbef12f71bc5");
+    	virefy("5298232","bc78933ffffe2c5fdd699ff684bbde18");
+    	virefy("5682282","57f8318b32596bf4ccd45bd38e6bb53f");
+    	virefy("5654609","4d68912e2cfde37200f10ab147c8983a");
+    	virefy("4140746","fd8e80f00f698b7781ac8b3888b2821b");
+    	virefy("2074704","f21a0b483fc93da1936c6ec3542941f7");
+    	virefy("4232591","e1ea448724974483a21c46c7a79a1541");
+    	virefy("6163932","6d6a65ec26933815c2b1897dc4e5107f");
+    	virefy("5787222","2772bc8e34c1233215d78155edcde0d0");
+    	virefy("6317943","c1966ccc8504ce8c16aa23dbae4832c2");
+    	virefy("32643","8dde525dee17a7f7466de6bcb077c3a4");
+    	virefy("5938801","0b5e97b9bec49e92101d9722a79df337");
+    	virefy("6398915","9d10f32860cedb7d5058167f53cc2af7");
+    	virefy("6178185","50430299586fc667809547873a9783c5");
+    	virefy("3219949","ab74c1c5fa897938f7605ed5c4df1408");
+    	virefy("6505827","a028cd68bf9b852d8b266abc578e33fb");
+    	virefy("6546017","de3d44a6f58e6f9781a914558f285dfa");
+    	virefy("5560109","993021402a0a56db3dcc71e0a542e3a6");
+    	virefy("6574519","d4cd65e56ed81cb9150fe975dc6fb0bf");
+    	virefy("3131387","c40779449eda694639300bb7bfed8110");
+    	virefy("6579143","67d88b9eea298f53089fbd40393c1264");
+    	virefy("6177397","aeaa2c0a44c4466e133a2e8f9e6b1523");
+    	virefy("3781965","9e6c85bb06bab46ab9cc96d8e555c64a");
+    	virefy("1658893","095193c18a9dd314550e76d0f8c21271");
+    	virefy("6707949","ea14ce78f558e049387ec376680f29b7");
+    	virefy("6640278","26f169e894f6a6ce1b92103c16a8d3de");
+    	virefy("5822187","75a327d31025493565afbb28dd59e923");
+    	virefy("6655579","8e9be63c12999c27369732c7263fa88d");
+    	virefy("4705237","5df8aeb86d3f76cd0a95b365f7303ccf");
+    	virefy("4346770","c0cd856a3e1649e93c762a7711da13d0");
+    	virefy("6805139","adf4309e3873eb69963672dfc1a36635");
+    	virefy("6809514","225438995b4cc8ec66d415a78816af09");
+    	virefy("6135123","dff113b0e22d3949b604dc760c23f8d2");
+    	virefy("6640278","575ed8736d2bea42b05d750731ef2c24");
+    	virefy("6640278","ebda0b03b75e8f68369ee9b274a14821");
+    	virefy("4649334","095cbb9d4844696b6f36f353475a9d19");
+    	virefy("6945119","a8357fb9bbc701678a256bc7648d1bf2");
+    	virefy("6955003","671188e4c56d1589f7cee1d0dc0a1185");
+    	virefy("1248856","4b13ba7d10f014cfbaed5c5b9ddc4a59");
+    	virefy("4645115","187dbccccd4f807055ee8cf361c73014");
+    	virefy("4994420","b9664ebf8d900172aa4152fb413e9620");
+    	virefy("6924006","262b66f675daa9988f53738bc68331b6");
+    	virefy("6936203","11a488aa4e4ab7599dc0d3e11f7dd0e2");
+    	virefy("4414607","cb7bdb5dda9e8c138dcb8924801d9e55");
+    	virefy("6921081","65e0e18589b970bb365a974c51113d92");
+    	virefy("1319218216","e7d1db406618242600dff0fdcdff95ab");
+    	virefy("6917004","a7182682b0d84b333c05e8ad0be6370c");
+    	virefy("7126830","046c1774c0f961963cbdcb7f4ba281f5");
+    	virefy("7100521","1367bce576285af7a6eb3683e8973060");
+    	virefy("6803803","cf35b8db80d7cd54312e33ab4199dd83");
+    	virefy("7010512","15b2288134784586c5fd6c40b666a034");
+    	virefy("7093241","3fb662de0623a259e767867734da3955");
+    	virefy("7108149","9646225d953e55d84b646323714d53a5");
+    	virefy("7196143","9ce12536c14c655b9c0543dcab7310fe");
+    	virefy("7226475","0fb71590a88244bad746c5aea53483dd");
+    	virefy("7210214","e2d60e7d92555dc607f426a2a55d992d");
+    	virefy("7221089","1675d0e7d100f59b019ad6274075444c");
+    	virefy("7146905","4166ac7b53d68fd6801eb775f76444fc");
+    	virefy("6483729","ea29e903292ab57516e6ce7d70ab2f4b");
+    	virefy("7240840","c41aba05b74ce4ffb04d8740f5ba1f46");
+    	virefy("7270774","17c9d697f25ae27f68fe1947f9b55c97");
+    	virefy("7301902","223dbfdc2590f2fda81934765112b9ee");
+    	virefy("7117194","e5060075cf558bf4122d27d2167a3d75");
+    	virefy("7206033","980b107df3e78d572d45f73d66554ebf");
+    	virefy("7115483","d64dedc0bb6aea5d11bf652e901965a6");
+    	virefy("23942","a40774d9f0935081b262085257f19e72");
+    	virefy("7296982","c6eab3cffba0ce497ffe76a294446133");
+    	virefy("7251956","134f533817241295f65db6eca810fb40");
+    	virefy("7064774","63a39abc5ab4aefa8408604e887ff37c");
+    	virefy("7196190","1d1f0944241da35caf80a13fa4727a0e");
+    	virefy("7259369","88c89cd5d6e3f523f7b34c65094e57a8");
+    	virefy("7259400","2333ddbce40584360da4bd34a8056425");
+    	virefy("7484801","340d1d8cafbc80d717f4aa1682a442bc");
+    	virefy("7513433","b479e316523812de366579073fb4e610");
+    	virefy("7531890","2340bfb75c853f85f5bbf49171886c53");
+    	virefy("7401857","043a0563ba219af6c3e97e547115decc");
+    	virefy("7288623","e59ed2227f2f0f5d493123d4911b62a3");
+    	virefy("7583702","e4ad6f39f07f5ada7c14ea54cd826ea7");
+    	virefy("7583676","1f214b0401045b84e4149a2999a100f6");
+    	virefy("7491204","b194ebfa483fe807ba320c810c0e602c");
+    	virefy("4946336","3526db120c1b457f834f045f81971d92");
+    	virefy("5275557","37e875874e2126497f227946b876e0b9");
+    	virefy("763555","b89ad5e8bd0e64a811ddd313d9e7abdd");
+    	virefy("7630810","70531863c96deec3e5372db6a58ba9d3");
+    	virefy("7662524","4b2f2ffcbbe6f5d76a30d39c4329b59d");
+    	virefy("7632613","b752e6b1203fccf9b4b958e2c59a5f75");
+    	virefy("7156553","90a7f1c13aaaaa2a18f63631f52635aa");
+    	virefy("7662937","696a3dcb0026b3e9f78b94ff07c85043");
+    	virefy("7662929","df97a9602c887436b318dd8981818c13");
+    	virefy("7541622","00eeaa4064650b985bee5dd1bd92011c");
+    	virefy("7298073","00555960eaec51965b9d4113619047ef");
+    	virefy("7589377","5152c81105d8974e26baf39a781b0308");
+    	virefy("6813306","ecb6a071adef1bbcc7ff6303895b07aa");
+    	virefy("7156876","ff6188309372fb4d71533c9652c5568d");
+    	virefy("7636314","41ca55ce9ab0c2a3046ac4a8ac52f225");
+    	virefy("7258136","f32fb9c3b811f2f295fe920c4383a173");
+    	virefy("7743918","f52e991a758527f885101a0c98a891fb");
+    	virefy("4737064","1c103c043296e51d96d929e7237b86de");
+    	virefy("7795672","779134f4462a32f9ac9c6e618c94e828");
+    	virefy("7554595","93417e0d19be91e0414c658fe0076b75");
+    	virefy("5072077","8395ba859b78bf4b6d7a8047b76fb32a");
+    	virefy("7672036","7eb99a89bc5ab874bde6f2639bb09ea1");
+    	virefy("7756602","601101694f853d5441d54690cf7b2a07");
+    	virefy("7387640","8a814cadfde509d763c0f3031bc0e928");
+    	virefy("3328871","44897195dabe6aa8082de3fd2274431d");
+    	virefy("7209721","35b3f71d9f68b9112816fd089e0ba62d");
+    	virefy("7705360","5c8143b8790cb818a1a483e2be3cc790");
+    	virefy("7749296","de4004390a8a163bdc6edbeca336babd");
+    	virefy("7781277","688dd942328fe3e7f74750a2518e2cb5");
+    	virefy("6720001","f58749433bab1452addbeba236810583");
+    	virefy("7864431","49e0ab3228c2ff88eceb0d988c11cd7f");
+    	virefy("7929599","10f9253a9d5c13bbe790594f7fac3a53");
+    	virefy("7926394","eac10f34de9a81e9d90bccb548897435");
+    	virefy("7934616","107675fdee9e4aeff62f022e519b8fa0");
+    	virefy("7934624","0df1423a8a2a05f85c33d31ab1249624");
+    	virefy("7995580","2c7465e9f9a2b66caf647a36aa217c07");
+    	virefy("7971499","6193260168fa2ed0deea2efdfa80f3a4");
+    	virefy("7451318","c7667264527d4806c82e7e918cf5d1f2");
+    	virefy("7971369","677194bf8d5cd76ff084976f560113f6");
+    	virefy("7624379","1f38f29f9b98c3f23f2ba5926d64abe0");
+    	virefy("7680781","8bb46616d56e5c19d89cedc7082ca14f");
+    	virefy("7455543","e1dd7b789987889b8a8f4e121a5c768b");
+    	virefy("7943143","4340d497f59c30667b93b5a1bb89e035");
+    	virefy("6721289","00f9e68d51965e60b73683a324e67321");
+    	virefy("4602821","0aae845b5f0eb237140e099811e176f6");
+    	virefy("7207008","f1f62ebe0b4ad6aa02d135b096b32b14");
+    	virefy("7195255","5c8bbcc3b80d721b8d0fa9980163cc64");
+    	virefy("7207001","938142fb8a08484a2457701b927ed5b7");
+    	virefy("8023484","54041680e1b5de9b4c192a63f13209aa");
+    	virefy("7886664","e021d524ba88cc9a9baae300c617b3fb");
+    	virefy("8068533","c0ae0a13d02d0188ba481be20493791e");
+    	virefy("8058358","75914d1ed91e62fe3a36f922f0851650");
+    	virefy("7608272","5ec7b687af5c281c3f86ac7fad053296");
+    	virefy("7777205","85e6771d55d70ba0f3aef868bd3c4f0c");
+    	virefy("4715130","499ba30f041b2a5219b1ad0706ad9725");
+    	virefy("3499003","ee496609a867bde4a8f204da6250af31");
+    	virefy("6576377","574be6bcdf9c7d254a26301b8d6990f2");
+    	virefy("8043133","89bf98f240366c8f5c0e10f7494ee76e");
+    	virefy("7972364","5fc5bff3052774ef8bcf73a821ab1ef7");
+    	virefy("8181092","161929c8bd730fd1ecd4ded52f8c87b7");
+    	virefy("1468845","8b3ba869944e27104f587e0662a8e920");
+    	virefy("3918090","025d3c1a371994af7539700ff2ff7e97");
+    	virefy("8059317","51ebb812060df420ad7b0bd27f2a8542");
+    	virefy("8053263","e09a422fed49dca89ca90b5275602141");
+    	virefy("7789078","d046a80d690d74a2a50709380cf43656");
+    	virefy("8175254","6f1ea88b70cc70882750f84faf64289d");
+    	virefy("8188316","4cb92da8d8447843b9a8cff2d60026ef");
+    	virefy("7910009","445eb370093767bd72ecd61dacbd0f41");
+    	virefy("7097755","6874b837b3bef27c7a636539a7bc6474");
+    	virefy("3430023","2067c8087f6819375d8625d78a2a4454");
+    	virefy("3436829","4e0f34369669db77268a8ce417685529");
+    	virefy("1541781","213c73341137d3f4248feda54701b875");
+    	virefy("6161361","0ee672c8544825fc207e41bfc7d5e6b4");
+    	virefy("1486973","b3528548d0652c6b9eed7a2e71a738ac");
+    	virefy("8147208","7a15cc98368dcc97588a024dab2bd71e");
+    	virefy("7201507","394d92e833651a6eb2698c30d62e923c");
+    	virefy("8104565","ef5e97b68efe4c0dddba3157a7e5c46e");
+    	virefy("8063843","789678bf66c95bd1758c1166cd0a2712");
+    	virefy("8063823","e4debb4a76be6ce120f3f2d55d3206ce");
+    	virefy("8069820","32d2ee4600d3c3dd9bd7424221f38954");
+    	virefy("8202569","07a369d1c0b2aefefe3725a9a2775f51");
+    	virefy("5364642","dcda16f1d4c2fbbb6aae7241facb69aa");
+    	virefy("8191449","3e26f95b608fc6d6d387b9e4d767bce0");
+    	virefy("8207461","ebfbdbffa471938fbc324451f800dd5c");
+    	virefy("7898312","f879af576c04c6a01f53f50098ddc27d");
+    	virefy("8038985","5c0025acd66b57387422bebc73d023c4");
+    	virefy("8102911","57b8eeb8161939d3f3f630bf83205dba");
+    	virefy("3667200","8f85cb54aa3f0d964ac44c54c90fe153");
+    	virefy("8216230","18fa8971a0dd26d2c8f4e583a1633028");
+    	virefy("7803576","2f66263fb434b78a4202886e0ba1c588");
+    	virefy("7824296","7aadd5ba0770efb51404060586fd5c83");
+    	virefy("7559201","02080ba7eda83f88f38d635d7b4b5b61");
+    	virefy("8233114","127baaed627f4b028cc0c52c095b40e7");
+    	virefy("3290414","60ceb0ff42740f0ed4731d6afd88f262");
+    	virefy("8211313","86430760b0cf1f4b3c9f0620e7f80d35");
+    	virefy("8211329","4a435d7c17f59a69ab6b08b9d77115d4");
+    	virefy("8104662","f0b736ae0043eb248f14bc4e40097ba3");
+    	virefy("3105872","abacde20fe4af81a6a79371739da8320");
+    	virefy("1063801","9b0ff42500e32ad2cb8b7f96b65a87d5");
+    	virefy("6349036","ca37765d3108819a99771a40f1c10d49");
+    	virefy("4326351","57ba2172e1b9ceebebb1e69f15ded5cd");
+    	virefy("6778903","bf5608de47898f8b550c7dff9a522912");
+    	virefy("8047945","064848f67fea7348648df44d3c5b1da8");
+    	virefy("8227302","955904352132f5c14af136fb8f2e216d");
+    	virefy("4582780","06680f881080afd7019252a3eef55209");
+    	virefy("1262417","bae869cee369dcb3ea391a215339adaa");
+    	virefy("8226936","2511712fd956e8a1b7335cce68bccad4");
+    	virefy("8294904","b4af721dea57b243bb877705e0966049");
+    	virefy("8180274","5531aebe3c82632b5a926db0fcc8866f");
+    	virefy("8268237","b239d3774781c2131218cdf82428a291");
+    	virefy("8306249","6065d1b060161fb6bae97841214babf1");
+    	virefy("1644694","a7944aa05f51d1fbddc19adf40090e45");
+    	virefy("5246154","02c9b8f6be027984840df7d2ba042ca0");
+    	virefy("6491124","03f287282efa213a2de219fe6da13674");
+    	virefy("8287501","5bd081d5566fd7c3d6c93d79267e8fda");
+    	virefy("6251105","4302fbc93ba5a329710307c25d3d3854");
+    	virefy("6778592","f5562a2bff582d2d3396773f9395c8bc");
+    	virefy("8363250","bcff870ee39134baad2ba51b5520199d");
+    	virefy("7297826","71bcbe97106d41ff9efdaf07013413bb");
+    	virefy("7297840","209490dcf16d0cc015ec3f0939ffdc17");
+    	virefy("8338527","79f653ba41cb9d0c24252e8cb49ca8ef");
+    	virefy("7815829","41f16a863e4709c4a3872fc88d940999");
+    	virefy("7823881","c6c196837b58d21f80177b445c5749ed");
+    	virefy("6912508","6818a34922bc701fbc236bf024e23d13");
+    	virefy("4947368","77e2b08bf22678d0aa15fe075d8c1ff9");
+    	virefy("7696288","e421dab11b65ccbdf3e22b7ebf531ed9");
+    	virefy("8339678","6bef90cba7338cb23b17cce79e2bdfcd");
+    	virefy("8385910","fd0af63cd71ac60cbcfcc5115eec35a4");
+    	virefy("8339744","d3891a60c60bbcb512947c34daa597d7");
+    	virefy("8339620","f98e41b7ae89614205b61d2704fb937d");
+    	virefy("8303381","63176fa4e76f4f5fdd8d719d7441518f");
+    	virefy("7696267","87ba21c16d8d4f0264cb7033fa694ce4");
+    	virefy("7826211","e6e3dc1ad9c494d0548158581c00f20b");
+    	virefy("8390200","417e20a2fda6d5036440b1e797517f25");
+    	virefy("8390188","4cb0bf3c26120fa0016f72306474eae4");
+    	virefy("8398000","d1040504ae0b8b2623ec29ef473a4b3e");
+    	virefy("7490283","00f7b48086ec6cb0be525b88a341d8fc");
+    	virefy("8005965","4272c76766b1180a39fe30052db7e62f");
+    	virefy("8410036","efdbfda54576f8cd9ad8d26b87e2c95d");
+    	virefy("7567396","aa3dfc7e92723c2f07fc95dc4a251d5c");
+    	virefy("8211873","9110cbccd79c7cb71ff93843adeac2eb");
+    	virefy("8407854","27f1404c39242e0e4197ecca840a3c6b");
+    	virefy("8306162","8dff03661bbff27b694489043817d340");
+    	virefy("8147518","127995411ff0ce4790fc7898493e2597");
+    	virefy("7503432","741284c257bc73324a474097b8013968");
+    	virefy("8298066","94eff8d9cc1a2a7e32fda45a8d915d34");
+    	virefy("5160997","3c3802e46c71efb9a1a812f1e406f02c");
+    	virefy("7152797","ce9c8cc7ef44062feeec2d98e8673b7d");
+    	virefy("8443638","5b9fab5655dd85c7bdac95ea9cd5df69");
+    	virefy("8218652","5133bf4ca8adca40681bfd2091129c1a");
+    	virefy("8218603","13cdfe2aca52401b0abef65a28bf4271");
+    	virefy("7073636","f7ac48962647de8cd339b9312fec7921");
+    	virefy("8149836","8b18b5cfb86671d47fbf6c49cea0adcc");
+    	virefy("8306409","8878281c90011ba18ed55b7528d7e84a");
+    	virefy("8402821","a740322ce376b3636c36739990b95fc2");
+    	virefy("7515810","bf3f699b1a5c92af46b4b36790756e33");
+    	virefy("8409328","415d602a4d107cc4cfa8e917e107d175");
+    	virefy("3259678","b2fcdce2f8a06a7fe0cb86e227d09d0c");
+    	virefy("8352659","d0c36d20bb002bfd0b0030b17c91573f");
+    	virefy("8416354","f27db933e15f1ab547591103d6b12aff");
+    	virefy("7393160","c843095b4849708e40e7ea5f4d0b1ae0");
+    	virefy("7625689","19509ae2a2ce169c0ba49ea0055d81c2");
+    	virefy("8449854","5b58411a9bd6176b717251be87c2556a");
+    	virefy("8449841","b2c1d2c0125826300d7ea8d99a161284");
+    	virefy("8449820","08cb03747d00058605b94e1828868f9b");
+    	virefy("8449802","30a88f0504cc1ead9fcecbe42616b6b0");
+    	virefy("2075727136","bfaf34c35929e42815d74d8ad356087e");
+    	virefy("4648551","64cf22583a13dd48720215819906a685");
+    	virefy("7827877","382f823d1077caa5ab7203cd61fe8f81");
+    	virefy("8454864","b2bc89823b67f1b574ed0bae0d2a1c07");
+    	virefy("8393866","3cdd3034cce247d18f9d455a833e0f35");
+    	virefy("8126628","774e7595d20f10e8116825db3f8d3d82");
+    	virefy("5487512","af6b44f32ca0d77484f913b3888fcc95");
+    	virefy("8360315","5f36ba4a62298f8a025386ca0e91ccd4");
+    	virefy("8508133","b70675d860b03299b44f15eff0ba52ec");
+    	virefy("7792849","e5808674c297408292c3360f20ad2360");
+    	virefy("8311573","1b70023a51610a547ebdc397fdd58851");
+    	virefy("6317434","8d8d0016bd20c3c74f23f901c980dd2d");
+    	virefy("8048157","86aa68d9ed6c27c46450eb4eb2d05426");
+    	virefy("8608118","37e08c902f96129007e8fe1959f38f11");
+    	virefy("8562002","c91844a1669b2bd8b1b0f44323519c91");
+    	virefy("8609944","01d860016fb715438926d5f41753448c");
+    	virefy("8627176","5ba5ba1d0af3f71383e0b491307e2aeb");
+    	virefy("8433409","530991afbbda45ecdaac8742d740af40");
+    	virefy("8190985","3928fa491d5607c6d0c0beb3a3bb55f5");
+    	virefy("8632565","c062b1756db445511e2be931f21c9691");
+    	virefy("8611376","0ba3edc53f0b74094a64c0ee7ea6adcc");
+    	virefy("7503499","81927e94e786e2b6e51f6e751f0ebb8b");
+    	virefy("8299528","33cd31a2e64bd60c24d56f31e05298c0");
+    	virefy("8639589","1d0c18345dccd65f21ae369486d1ba1c");
+    	virefy("8627244","781dded3bf3db803e81b523ce1a92c0a");
+    	virefy("8373213","5ecb55f2f5aab3f118f04e3a46df678a");
+    	virefy("6249719","ce28a8a2c31072d2950e1154a1ecf081");
+    	virefy("1083083","825cbcdf5cb791793a5dc512e8e134b8");
+    	virefy("8306097","c2935ffc3b42994f5e13d1a59c54de46");
+    	virefy("8447136","f49a2e4e6372638b63ddf658713f7e2a");
+    	virefy("8546714","359a11d9fd860277e4315d5890917aaa");
+    	virefy("8546734","2a776f6d766b29d214082681d04ba0a3");
+    	virefy("8550386","28c9a4bb6130e304c2b50caa9b3c5eb7");
+    	virefy("8550447","623abf51afdd840455368c1a351d3094");
+    	virefy("8635890","00c6594bea43e1230655fa7a3f3699bc");
+    	virefy("8635905","0c9ac7fb9bdab91e377292306606d2ca");
+    	virefy("8669996","8f789779126220f79de51b07332320d5");
+    	virefy("8653577","3f8015350c7054f55b0e5b9ad5f71b7f");
+    	virefy("8653635","5a4401c049ee8c7fbb50b12e7a720133");
+    	virefy("8656687","32c87d0ab59fa55d3243fdfb5bffe6fc");
+    	virefy("8656730","748e39707011130bbfee7f0e3dfb768e");
+    	virefy("8656706","8990b0888534028b41da7a8b0929ff41");
+    	virefy("8436377","4c57b7cb37a451971059c531df346e49");
+    	virefy("8640285","4991085022459681301ed0f1a94c2500");
+    	virefy("8669987","18a311d5b3f42173a60be321e3918de8");
+    	virefy("6297263","b5abde4df07d2b4b6601a2f917f6b5ef");
+    	virefy("7698897","d42e9ab647a721c362e17303b2844f02");
+    	virefy("4620814","95a6fe9a5418b2fc261908562d83b904");
+    	virefy("8658229","069493bdb50e8b383936fbdc5e607094");
+    	virefy("8680414","720c05382f7f422ec0587812bbc9b6fe");
+    	virefy("8667664","25c893663eab88d79c7cfb3a529c01aa");
+    	virefy("1826149","9cc1a55d9bad558ab54ddfc8d56951c5");
+    	virefy("8048141","ec43100cb61c3d152b211c1ab0827f9b");
+    	virefy("8048164","bb5736bb6b94e4225f8b25d543dce876");
+    	virefy("8323151","665dc4061fb87da1bdf050a127d54cad");
+    	virefy("8485245","b19a63df7a719889bf9752380d6552ce");
+    	virefy("8521688","d597ca57403b540d8384a564532d8f0e");
+    	virefy("6826691","853894b021886966966c760b6e17c2a9");
+    	virefy("8677308","9a30e2f734bc3200158fb609f1b310c4");
+    	virefy("8677348","728f95197c7e46828f5b977fdf2b25b8");
+    	virefy("8733716","46edbfac7569955169fb26f5227040be");
+    	virefy("3819182","9d6b18bbb3c211cec854a5614899d84a");
+    	virefy("8559288","83f1f31c7f7791bc5af707f523ed3f04");
+    	virefy("8232236","b1d67cfb95d153c5310fb3ea7b8320eb");
+    	virefy("7632602","e676e771116aad4af12f4cf4c79d1978");
+    	virefy("8688527","9026b877aad0cd29a76690861fb8df54");
+    	virefy("8613914","447c22f678b67732f57863364fa78117");
+    	virefy("7628841","2637294151d7befabe25ea7ae22c036a");
+    	virefy("7628900","b0087d9c9978bd0770c799ba5c0c5393");
+    	virefy("8774886","fc3c42b37aa33a74988fd4254c4254d3");
+    	virefy("7943137","2a4e1d1b46579bd87c835494b338da26");
+    	virefy("8389430","928287cfdd5f441a8f6bcfeb8134d71c");
+    	virefy("8702049","f6f1ff6f852e39f9f029c234880837c3");
+    	virefy("7440640","ed1ccdca56b7bc18f6d6034e75206b31");
+    	virefy("7440667","174cda7b4d3988d4bb586dc43f021b4a");
+    	virefy("8774833","01bc1ae63cf027f1ad02e1a34a06e2ce");
+    	virefy("8774767","a09b289e51f0b6aae55b0c810a417591");
+    	virefy("8543067","4102b4d3e1276ce6e9508dbff25b378b");
+    	virefy("7454391","438403f1cfc85205b15b6759d11c67ee");
+    	virefy("8778735","d28a639ab4049aaf059748ef0ed4aad3");
+    	virefy("7943129","ed28a2abab88e7d567bc9c781cbbb1f3");
+    	virefy("8811802","86aea8bac5a6436d6f0c00b38ff041c3");
+    	virefy("8811809","161545a10a17229ba5a7282fe7838a4c");
+    	virefy("8147505","48233f212ef148f5a034b29feba11dc4");
+    	virefy("8226756","33e54f53d856d4e2eaa225ea05bbe09d");
+    	virefy("8691968","927c84ae7104ab6881894442a32d3570");
+    	virefy("8268471","4bb7e6fe1677ea754beba1e5a5e334d5");
+    	virefy("8692413","7f71f609b4fed67e426f1b2fcc590817");
+    	virefy("8683283","1fc5b65c3afe417e0da0459abce8753a");
+    	virefy("8166409","1c0f3c61250bda14301b0542ce217c60");
+    	virefy("8303424","01f584d7f7ce0282636523725cf78435");
+    	virefy("8778022","2f88b39397147287bdcea835df71251c");
+    	virefy("6778868","a706f5294decb5549df404df998de315");
+    	virefy("8857823","30e8a95c1cf31baab08eacb4df05e2c6");
+    	virefy("8752031","995ae7f5c8c6b03d663a1c89f4e04044");
+    	virefy("3422433","07f92346693e980cdfca4738eef56f99");
+    	virefy("3174918","f5aed10e12878fcb21141308c7465291");
+    	virefy("7976076","8f1460e545d0b370620ea570ba223bdf");
+    	virefy("6417034","0e6cbff372c13c176312fee83d924146");
+    	virefy("8866484","c7f8d589bcefe474dc33395b464df38b");
+    	virefy("8416105","128795e8a51460225ff9e14fe9cc287d");
+    	virefy("8878798","4b7158056ba86f46827f7bcb1c27308c");
+    	virefy("1408620","4f64d98667eec81ade8f2f5f5fc6b2b1");
+    	virefy("7378233","6f1bf3b09daa0d7eedcb8b651f2344d7");
+    	virefy("8868384","7fe0d4c3a262941753644014040f29d2");
+    	virefy("8868391","c5509056a91e9661f743382e9f584d23");
+    	virefy("7623079","0822bc3827783958040d0893506054d2");
+    	virefy("8894877","f0b3d4d9af0cc5266984df3c2df550b4");
+    	virefy("8416096","ed3af4ce46ac1de917d6c31aa6de3d46");
+    	virefy("8925450","b4ad8267e9e6012623f37f1187f3c874");
+    	virefy("7623063","7353c209ed934f055505483221c19411");
+    	virefy("8586119","9ce43506caa8056a15579962bbfc8185");
+    	virefy("7878755","54d9b23678d02711ea65e11b67c753bb");
+    	virefy("8921915","ef282c457dbd83f106075d8a00d2a768");
+    	virefy("4988163","feab4a408474828e917fdaef1a9e261f");
+    	virefy("8267178","4538e2ae18add9231dd3de4d33820654");
+    	virefy("8912303","0d701c418dd8782e415f7a1fd66c29e2");
+    	virefy("8921510","da1bf0cc04234e6add3bf28f98ac6f6f");
+    	virefy("8938264","08390ae81fbf5092d46abfe782855a14");
+    	virefy("8938258","cafd34c2a23707f2b291f7fdeb4ae55b");
+    	virefy("8254673","ad9887ef97c2d3392863a1a2b6198c59");
+    	virefy("8920614","c14ea8af48a93c99693ace882fa9582f");
+    	virefy("8130082","bc9e28f617fb0e69111a303246d58da7");
+    	virefy("8252329","02a709bc41a57f11838d3620f6cd014f");
+    	virefy("8919262","a8c040e45b78d22152fb725032081320");
+    	virefy("8919476","068097091631ffd7d1271a3fb33bae25");
+    	virefy("8920847","fcd98dbc01aa799425c9591c97b7cb90");
+    	virefy("8920858","b4a86d9fd2da0699d989cd5487e077e9");
+    	virefy("8919281","f47a260b8f2b646e60a5afabfecb5041");
+    	virefy("8924227","7b9f23f36c2518fbe38794a07b35fa1d");
+    	virefy("8924250","e469b58969069de9af536a273c41ca42");
+    	virefy("8924262","793860732f3748efac0edb656f138889");
+    	virefy("8924293","1422c29f787f8814625a4c83290cc19e");
+    	virefy("8924300","924536bc04610fbcc017d60f51bb357c");
+    	virefy("8970274","3c06b623b586abbc9836c872a45c1c14");
+    	virefy("8970254","f599b9200d19e1bea8b69f87ca56081c");
+    	virefy("8966190","3551e2e0541eccc4ff278ebdbd51c81c");
+    	virefy("8970404","10cd89d3cada8fa0796a588878946649");
+    	virefy("8970388","eb6984b8fef9f09e1f5ffad83abd6aa5");
+    	virefy("8970370","2de2bc9bda5952e3d8d7b221c69da00c");
+    	virefy("8970344","2c90bdd938f181837a00b94388f78e77");
+    	virefy("8970299","bbd496d7d88c11d75c6877700fd2145e");
+    	virefy("6742741","3d9a0fa23878b5ee7690674691e885b5");
+    	virefy("8980266","547091f1e82e8f3540062bbb60570430");
+    	virefy("8979660","7c5a35d9031156b5076e0e21fb270870");
+    	virefy("8976826","089a2c261b1e46d6485b74a9ed64c70a");
+    	virefy("8894123","33dc95cfd526a2aef4afb2cc0182c9d2");
+    	virefy("8641913","ed0e40256ec0dda1c5ed391e38a133b4");
+    	virefy("8937620","7d8d424c309225893b93e4fbcad25641");
+    	virefy("8937670","8e7e98624b961d5560320bdc119a8433");
+    	virefy("9008907","50edefd6eb2a6270b58b63e58a2c7862");
+    	virefy("9015320","e024b41a6e3f0884eb22e652a41c08a1");
+    	virefy("9031223","b9c96061a6423d03157ebfcd7eba92cc");
+    	virefy("9031752","a221746813e8fd1168f342170defcedf");
+    	virefy("9010230","38273a356eb04ae435d6d3d035335c1d");
+    	virefy("9015335","032aee416ae57c200ee191017bed3245");
+    	virefy("8998799","52d2b16606c3eb9ff123351a423fd39e");
+    	virefy("8998775","7ebe23edd38ca83005463eed8e27f4d0");
+    	virefy("9039435","2b6ae1ec72346dec4a12a9a53a014c15");
+    	virefy("9039452","b369888e4d2c670bd22d9f746d86a214");
+    	virefy("9053733","8f75d6bf26fef0b0b40bab22346af8bf");
+    	virefy("9053739","642234553cfe53f8cec693d75010877c");
+    	virefy("9053779","733d561c246141a2bd47df5cae235ba4");
+    	virefy("7530404","eec2fb66c4ab98668d90b499385efbcc");
+    	virefy("9010195","d3d72d5be84b73807ab0186fbee1147b");
+    	virefy("9010213","764edd2f85e4b5b6a02ea406226d0968");
+    	virefy("9053749","52a5f73766ef695b24f185e632c1b01d");
+    	virefy("8694764","69ba2da1b8384b5388d471aba5e0215f");
+    	virefy("9071138","34f275aeb986947896b16577e38d51db");
+    	virefy("9072405","7637df472a59cbf2bfd8da1bd6bf5c1d");
+    	virefy("9031216","10df9f586c041bda5553fb2451898fec");
+    	virefy("8675289","882c6b81e39cd97036f7ba0ed395256d");
+    	virefy("9053756","549d4c433ecd71208e6f3c7a65d6657d");
+    	virefy("9052433","465fa6db9a7705aff7bc1b78ffcf9283");
+    	virefy("8979690","cfea3e6b4b9fbec0387c580a6cc7f4b7");
+    	virefy("8979669","465c781bc0c7788e7b9920a132c0763c");
+    	virefy("9088410","bc88e2535db73ddf4032668f5bd4face");
+    	virefy("9036080","358f3078dcfafa1c9a2a00e101a20833");
+    	virefy("8871340","11c5b68e647cf53b9f56d03641af1818");
+    	virefy("7827153","ce2dcdd9a888b229fb5f022796b28b5a");
+    	virefy("9063740","42507a774588f6507c97a0530fee03e7");
+    	virefy("9092480","60f403b9bbed77b12110e968d388064c");
+    	virefy("9063461","8dc5e4416401c5ef593766b0c9dcb7e2");
+    	virefy("8559273","5738536f4e71063349d1abc987e6fcd0");
+    	virefy("8979588","d84158f857fa08ce4d3fcade28121cfe");
+    	virefy("8267192","cd784f85feb79dd1262cffeab91ba633");
+    	virefy("9010205","512871aa65211108d6df2efb0b363c6a");
+    	virefy("8970240","e2580669c1d4e19d173a5b640bda7b45");
+    	virefy("8966247","a1522df6be4cfa41b54d62b8dd0d3db5");
+    	virefy("7762721","01d5f055c978c4ca74e63e3a31b58265");
+    	virefy("7378210","7d23d781ebbd7d75a8915d7bd88e20f0");
+    	virefy("9153223","a32208e8649b5f2f1d47fdf95af42aa6");
+    	virefy("9163832","5335e508be3a342d103fa040272573ee");
+    	virefy("9163797","af042979382f6ace432a14e6baed994f");
+    	virefy("9125532","8f77f61ae28a09e182d75f11898b7f40");
+    	virefy("9010159","18e72d55da682d42e2386d29350844fa");
+    	virefy("9144467","71f669dd419aee06d5dc0979cd57ee61");
+    	virefy("9053744","cb9b53656c3f7a175a5cd62d73a71e23");
+    	virefy("9144992","de671352b359a32effc9cfc8066475d6");
+    	virefy("8373243","fa1c0b7afef39aa4a39e799670f42df5");
+    	virefy("9184796","9521111f275bb6d0d6991248bd923b6a");
+    	virefy("9144461","9b140e6bcef710025db7c403fe6d1cb0");
+    	virefy("8267200","12f6bc1fb7e9ee1452593cd5e4bce533");
+    	virefy("8062003","0da0c8c59e3ec9a1c1561b08a0f10b66");
+    	virefy("9173950","19fbfe4aa7f377849b3e5d8615569095");
+    	virefy("9132343","ccf41b2c88ef43d0a1950e6255148600");
+    	virefy("8979604","819c2159c457f9548f60c1c271da1e1b");
+    	virefy("9132746","f79eee7ba9034bdb66688e2132e035bf");
+    	virefy("9173961","118cb1adb7c86f6653a82294a75c3711");
+    	virefy("9188595","0c3e0c50c0a78126030120fb93b55c4d");
+    	virefy("9188664","50d7b029d1f15e0914d1b6471fdf8746");
+    	virefy("9193017","9353d8db9567308fe2ff26934078dd8d");
+    	virefy("9176739","caa640fc1571733ef19593dd6bcedccd");
+    	virefy("9169788","47c6888d47d9ddc14ec85f9cbdb02c9c");
+    	virefy("7378247","5cc307e3ee676b8034a42d990192b3c2");
+    	virefy("9199758","70c6388c50d4f617dbe56dd6e62c35ad");
+    	virefy("9219652","21b885acbdd875d3d09ecdab0439bac8");
+    	virefy("9219750","690baf53414c2247c513c0baa4642a83");
+    	virefy("9230595","3dc9e6db9e7c0cd665412a29ef2f5700");
+    	virefy("9200905","0a7e0dd09a8a7ac6af5e17c08004b61c");
+    	virefy("9200919","800ecb332abdb59a56e4f299a4cadf9d");
+    	virefy("9200923","0051971076f269f8b9825552d4c7020b");
+    	virefy("9217972","b3ae57e010a72a7927e5448f7d3037c0");
+    	virefy("9217947","d6f1f84a4f8dd006037a04082baad720");
+    	virefy("9230719","184d7f982132aaf53d22cda20528c37a");
+    	virefy("9239129","0a2c61ba821416f122c7aa5797eb8396");
+    	virefy("9245267","e7ddbf8a95e15713c994ca9872eb5bdf");
+    	virefy("9245260","ecd2988c4e237eb2b81def60162a21df");
+    }
+    
+    public static void sure() throws IOException{
+    	File file = new File("/work/test/0925/tt1");
+    	BufferedReader br = new BufferedReader(new FileReader(file));
+    	String line = null;
+    	while((line = br.readLine()) != null){
+    		String[] arr = line.split("##");
+    		System.out.println(arr[0] + "---" + arr[1] + "---" + virefy(arr[1],arr[3]));
+    	}
+    }
+    
+    public static void process() throws IOException{
+    	File file = new File("/work/test/0925/r1");
+    	BufferedReader br = new BufferedReader(new FileReader(file));
+    	String line = null;
+    	while((line = br.readLine()) != null){
+    		String[] arr = line.split("\t");
+    		String id = arr[0].trim();
+    		String account = arr[1].trim();
+    		String refreshtoken = arr[2].trim();
+    		String token = arr[3].trim();
+    		if(!check(account,token)){
+    			System.out.println(id + "##" + account + "##" + refreshToken(refreshtoken));
+    		}
+    	}
+    	
+    	br.close();
+    }
+    
+    
+    public static String refreshToken(String refreshtoken){
+    	String refreshurlTemp = "https://api.e.qq.com/oauth/token?client_id=1106237187&client_secret=BvITHJpxu0gufAxF&grant_type=refresh_token&refresh_token=%s&timestamp=%d&nonce=%d";
+        String ret = null;
+        Long time = System.currentTimeMillis() / 1000;
+        String refreshurl = String.format(refreshurlTemp,refreshtoken,time,time);
+        String rt = "";
+        String at = "";
+		try {
+			ret = HttpClientUtil.getContent(refreshurl, null, "utf-8", "GET");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//{"code":0,"message":"","data":{"refresh_token":"928d30487ec103b56cd7f7c66b4ee694","access_token":"4f8311d6adb033b449d24bd436b47b2b","access_token_expires_in":86400}}
+		Pattern p1 = Pattern.compile("^.*?\"access_token\":\"(.*?)\".*?$");
+		Pattern p2 = Pattern.compile("^.*?\"refresh_token\":\"(.*?)\".*?$");
+		
+		Matcher m1 = p1.matcher(ret);
+		Matcher m2 = p2.matcher(ret);
+		if(m1.find()){
+			at = m1.group(1);
+		}
+		if(m2.find()) {
+			rt = m2.group(1);
+		}
+		return rt + "##" + at;
+    }
+    
+
+    public static boolean check(String account,String accesstoken){
+    	String urlTemp = "https://api.e.qq.com/v1.1/adgroups/get?access_token=%s&timestamp=%d&nonce=%d&account_id=%s&page=1&page_size=10";
+    	Long time = System.currentTimeMillis() / 1000;
+    	String url = String.format(urlTemp,accesstoken,time,time,account);
+    	String ret = null;
+    	try {
+			ret = HttpClientUtil.getContent(url, null, "utf-8", "GET");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return ret.startsWith("{\"data\":{\"list\":[{");
+    }
+    
+    public static String virefy(String account,String accesstoken){
+    	String urlTemp = "https://api.e.qq.com/v1.1/adgroups/get?access_token=%s&timestamp=%d&nonce=%d&account_id=%s&page=1&page_size=10";
+    	Long time = System.currentTimeMillis() / 1000;
+    	String url = String.format(urlTemp,accesstoken,time,time,account);
+    	String ret = null;
+    	try {
+			ret = HttpClientUtil.getContent(url, null, "utf-8", "GET");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	System.out.println("========" + account + "====" + accesstoken);
+    	System.out.println(ret);
+    	return ret;
+    }
+    
+}
