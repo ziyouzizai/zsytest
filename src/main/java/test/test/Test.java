@@ -1,6 +1,10 @@
 package test.test;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,7 +23,6 @@ import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.Security;
 import java.text.SimpleDateFormat;
@@ -46,7 +49,6 @@ import java.util.regex.Pattern;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -97,24 +99,106 @@ import test.others.Cat;
  * Hello world!
  *
  */
+@SuppressWarnings("restriction")
 public class Test {
-	
-	
+
 	public static void main(String[] args) throws Exception {
-		test70();
+		test78();
+	}
+
+	public static void test78() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date d = new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
+		System.out.println(sdf.format(d));
 	}
 	
+	/**
+	 * 写一个求不定集合的所有排列组合
+	 * @param list
+	 * @return
+	 */
+	public static <T> List<List<T>> combo(List<List<T>> list){
+		int[] points = new int[list.size()];
+		for(int i=0;i<list.size();i++) {
+			points[i] = 0;
+		}
+		for(int i=0;i<list.size();i++) {
+			
+		}
+		return null;
+	}
+	
+	public static void test77() {
+		BufferedImage image = new BufferedImage(200, 200, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = image.createGraphics();
+		g.setFont(new Font("华文彩云", Font.BOLD, 60));
+		g.setColor(new Color(0xfeab0899));
+		g.drawString("游", 2, image.getHeight() - 20);
+		int[] p = image.getRGB(0, 0, image.getWidth(), image.getHeight(), new int[image.getWidth() * image.getHeight()],
+				0, image.getWidth());
+		char[] cs = { '哈', '哈', '哈' };
+		int ics = 0;
+		for (int i = 0; i < image.getHeight(); i++) {
+			for (int j = 0; j < image.getWidth(); j++) {
+				int off = i * image.getWidth() + j;
+				if (p[off] != 0) {
+					System.out.print(cs[ics]);
+					ics = (ics + 1) % 3;
+				} else {
+					System.out.print("　");
+				}
+
+				if (j == image.getWidth() - 1) {
+					System.out.println();
+				}
+
+			}
+		}
+	}
+
+	public static void test76() {
+		int a1 = 1 ^ 0 ^ 1 ^ 1;
+		int a2 = 1 ^ 0 ^ 0 ^ 1;
+
+	}
+
+	public static void test75() {
+		for (int i = 0; i < 10; i++) {
+			int a = (int) (Math.log(i) / Math.log(2)) + 1;
+			System.out.println(a);
+		}
+		System.out.println(0b110111111);
+		System.out.println(0b100000000);
+	}
+
+	public static void test74() throws IOException {
+		FileWriter fw = new FileWriter("/work/test/2019/0429/append.txt", true);
+		fw.write("\nrun\n");
+		fw.close();
+	}
+
+	public static void test73() {
+		// String reg =
+		// "\\{\"code\":1,\"msg\":\".*?\",\"data\":\\[\\{\"[A-F0-9\\-]{36}\":0\\}\\]\\}";
+		String reg = ".*";
+		System.out.println(reg);
+		String input = "{\"code\":1,\"msg\":\"\\u6392\\u91cd\\u67e5\\u8be2\\u6210\\u529f\",\"data\":[{\"2B38C412-3E8B-4336-AAA4-4D383FC8C441\":0}]}";
+		System.out.println(Pattern.matches(reg, input));
+	}
+
 	public static void test72() throws Exception {
-		//curl -X POST 'http://idfa.trackingio.com/tkioIdfa' -d 'appid=1329345451&idfa=8D3F0E56-3ED2-4A1B-AB4B-9E86E234405B'
-		//h("http://idfa.trackingio.com/tkioIdfa","");
+		// curl -X POST 'http://idfa.trackingio.com/tkioIdfa' -d
+		// 'appid=1329345451&idfa=8D3F0E56-3ED2-4A1B-AB4B-9E86E234405B'
+		// h("http://idfa.trackingio.com/tkioIdfa","");
 		String resp = "{\"code\":0,\"data\":\"fa253f5de6354bdd7f7318ec765e7840a6c1548853a27ebfa2e07c597c1b462a34c7b1323b21c381a765a8a4dd5a6f4fcbe5143db72bdf976c19922790df72a007d4e3593610dbe522bc85c5dbdc2716d6d706185e0a8c33be07d8ea2092409b344cf5f311ae188159140ae992a65b9f538299ae4c7ed68308f8aa6a92566d2e8d09c5cf492f76ea0a5041bf4680807e846e2cabffcc31c0348439388f76c3ef930c08d9205df3d350806e7816a0b7cc40b7b4508efe2c972e4019fb86e4d98e1f4f574279fe6b227119798d5c205300fd80d24c9455786a\",\"request_id\":\"abf06a040a6d7d81\"}";
-//		net.sf.json.JSONObject result = net.sf.json.JSONObject.fromObject(resp);
-//		net.sf.json.JSONObject data = net.sf.json.JSONObject.fromObject(result.get("data"));
-//		System.out.println(data);
+		// net.sf.json.JSONObject result = net.sf.json.JSONObject.fromObject(resp);
+		// net.sf.json.JSONObject data =
+		// net.sf.json.JSONObject.fromObject(result.get("data"));
+		// System.out.println(data);
 		String data = "fa253f5de6354bdd7f7318ec765e7840a6c1548853a27ebfa2e07c597c1b462a34c7b1323b21c381a765a8a4dd5a6f4fcbe5143db72bdf976c19922790df72a007d4e3593610dbe522bc85c5dbdc2716d6d706185e0a8c33be07d8ea2092409b344cf5f311ae188159140ae992a65b9f538299ae4c7ed68308f8aa6a92566d2e8d09c5cf492f76ea0a5041bf4680807e846e2cabffcc31c0348439388f76c3ef930c08d9205df3d350806e7816a0b7cc40b7b4508efe2c972e4019fb86e4d98e1f4f574279fe6b227119798d5c205300fd80d24c9455786a";
 		System.out.println(parse(data));
 	}
-	
+
 	public static String parse(String data) throws Exception {
 		String strKey = "tourhb";
 		Security.addProvider(new com.sun.crypto.provider.SunJCE());
@@ -123,26 +207,26 @@ public class Test {
 		cipher.init(2, key);
 		return new String(cipher.doFinal(j(data)));
 	}
-	
+
 	public static void test71() throws JsonProcessingException {
 		FecInfo fecinfo = new FecInfo();
 		fecinfo.setMedia_id("fec-test");
 		fecinfo.setFec_id("90");
 		fecinfo.setFec_ver("0.1.2@83c14b4f682b39e0");
-		//fecinfo.setFec_url("");//TODO 
+		// fecinfo.setFec_url("");//TODO
 		ObjectMapper om = new ObjectMapper();
 		String s = om.writeValueAsString(fecinfo);
 		System.out.println(s);
 	}
-	
+
 	public static String h(String apiUrl, String json) {
 		RequestConfig.Builder configBuilder = RequestConfig.custom();
-	    configBuilder.setConnectTimeout(70000);
-	    configBuilder.setSocketTimeout(70000);
-	    configBuilder.setConnectionRequestTimeout(70000);
-	    configBuilder.setStaleConnectionCheckEnabled(true);
-	    RequestConfig bb = configBuilder.build();
-	    
+		configBuilder.setConnectTimeout(70000);
+		configBuilder.setSocketTimeout(70000);
+		configBuilder.setConnectionRequestTimeout(70000);
+		configBuilder.setStaleConnectionCheckEnabled(true);
+		RequestConfig bb = configBuilder.build();
+
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		String httpStr = null;
 		HttpPost httpPost = new HttpPost(apiUrl);
@@ -168,9 +252,10 @@ public class Test {
 		}
 		return httpStr;
 	}
-	
+
 	/**
 	 * 反序列化campinfo
+	 * 
 	 * @throws IllegalBlockSizeException
 	 * @throws BadPaddingException
 	 * @throws Exception
@@ -185,12 +270,11 @@ public class Test {
 		cipher.init(2, key);
 		String s = new String(cipher.doFinal(j(data)));
 		ObjectMapper om = new ObjectMapper();
-		CampInfo info = om.readValue(s,CampInfo.class);
+		CampInfo info = om.readValue(s, CampInfo.class);
 		System.out.println(JSON.toJSONString(info));
-		
-		
+
 	}
-	
+
 	private static Key d(byte[] arrBTmp) throws Exception {
 		byte[] arrB = new byte[8];
 		for (int i = 0; (i < arrBTmp.length) && (i < arrB.length); i++)
@@ -198,7 +282,7 @@ public class Test {
 		Key key = new SecretKeySpec(arrB, "DES");
 		return key;
 	}
-	
+
 	public static byte[] j(String strIn) throws Exception {
 		byte[] arrB = strIn.getBytes();
 		int iLen = arrB.length;
@@ -212,48 +296,48 @@ public class Test {
 		return arrOut;
 	}
 
-	
 	public static void test69() throws IOException {
-		String str =  FileUtil.file2Str("/work/test/2019/0418/bf_result.dat");
+		String str = FileUtil.file2Str("/work/test/2019/0418/bf_result.dat");
 		String zipStr = FileUtil.compress(str);
-		FileUtil.str2File(zipStr,"/work/test/2019/0418/bf_result_zip.dat");
+		FileUtil.str2File(zipStr, "/work/test/2019/0418/bf_result_zip.dat");
 		String unzipStr = FileUtil.uncompress(zipStr);
 		System.out.println(str.equals(unzipStr));
-		FileUtil.str2File(unzipStr,"/work/test/2019/0418/bf_result_zip_unzip.dat");
+		FileUtil.str2File(unzipStr, "/work/test/2019/0418/bf_result_zip_unzip.dat");
 	}
-	
+
 	public static void test68() throws UnsupportedEncodingException {
 		String str = "测试";
 		String result = Base64.getEncoder().encodeToString(str.getBytes("utf-8"));
 		System.out.println(result);
-		
+
 		byte[] bs = Base64.getDecoder().decode(result);
-		String s = new String(bs,"utf-8");
+		String s = new String(bs, "utf-8");
 		System.out.println(s);
 	}
-	
+
 	public static void test67() throws Exception {
-//		String url = "https://file.wikileaks.org/file/1000-us-marines-in-georgia-2008.zip";
-//		HttpUtil.getWithJudge(url);
-//		
-//		HttpUtil.getWithJudge("https://file.wikileaks.org/file/aryan-nation-2009");
-		
+		// String url =
+		// "https://file.wikileaks.org/file/1000-us-marines-in-georgia-2008.zip";
+		// HttpUtil.getWithJudge(url);
+		//
+		// HttpUtil.getWithJudge("https://file.wikileaks.org/file/aryan-nation-2009");
+
 		File file = new File("/work/test/2019/0416/wikileaks/fs/test.dat");
 		System.out.println(file.getPath());
 		System.out.println(file.getParent());
 	}
-	
+
 	public static void test66() {
 		System.out.println(createEncryptPSW("123456"));
 	}
-	
+
 	public static void test65() {
-		FileUtil.scanFile("/work/test/2019/0409/feicui_0411",new FileProcesser() {
+		FileUtil.scanFile("/work/test/2019/0409/feicui_0411", new FileProcesser() {
 			private FWriter fw = null;
 			private Pattern pattern = Pattern.compile(":([01])}");
 			private long t = 0;
 			private long f = 0;
-			
+
 			@Override
 			public void init(String fileName) {
 				fw = new FWriter("/work/test/2019/0409/feicui_0411_result.csv");
@@ -262,31 +346,32 @@ public class Test {
 
 			@Override
 			public void process(String fileName, long lineNum, String line) {
-				if(lineNum < Long.MAX_VALUE) {
-					//curl -X POST 'http://idfa.trackingio.com/tkioIdfa' -d 'appid=1450586372&idfa=427D1CC4-2A1F-42C6-A919-2944DF522624'
+				if (lineNum < Long.MAX_VALUE) {
+					// curl -X POST 'http://idfa.trackingio.com/tkioIdfa' -d
+					// 'appid=1450586372&idfa=427D1CC4-2A1F-42C6-A919-2944DF522624'
 					String url = "http://idfa.trackingio.com/tkioIdfa";
-					String params = String.format("appid=1380567884&idfa=%s",line);
+					String params = String.format("appid=1380567884&idfa=%s", line);
 					try {
 						String result = HttpUtil.post(url, params);
 						Matcher m = pattern.matcher(result);
-						if(m.find()) {
-//							System.out.println(line + "," + m.group(1));
+						if (m.find()) {
+							// System.out.println(line + "," + m.group(1));
 							int flag = Integer.parseInt(m.group(1));
 							t += (flag == 1 ? 1 : 0);
 							f += (flag == 1 ? 0 : 1);
 							fw.writeLine(line + "," + m.group(1));
-						}else {
+						} else {
 							fw.writeLine(line + ",-1");
 							f += 1;
 						}
-						if(lineNum % 100 == 0) {
+						if (lineNum % 100 == 0) {
 							System.out.println("===" + lineNum);
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
-				
+
 			}
 
 			@Override
@@ -296,7 +381,7 @@ public class Test {
 			}
 		});
 	}
-	
+
 	private static String createEncryptPSW(String psw) {
 		MessageDigest messagedigest;
 		try {
@@ -305,11 +390,11 @@ public class Test {
 			byte abyte0[] = messagedigest.digest();
 			return (new BASE64Encoder()).encode(abyte0);
 		} catch (Exception e) {
-//			throw new EncryptException("加密出现错误" + e.getMessage());
+			// throw new EncryptException("加密出现错误" + e.getMessage());
 		}
 		return "";
 	}
-	
+
 	public static void test64() {
 		File file = new File("/tmp/test");
 		try {
@@ -319,42 +404,44 @@ public class Test {
 		}
 		System.out.println(file.getAbsolutePath());
 	}
-	
+
 	public static void test63() {
 		File dir = new File("/work/ws/merge_temp/cmiic4");
 		processDir(dir);
 	}
-	
+
 	private static void processDir(File dir) {
 		File[] files = dir.listFiles();
-		for(File file : files) {
-			if(file.isDirectory()) {
-				if(file.getName().equals(".svn")) {
+		for (File file : files) {
+			if (file.isDirectory()) {
+				if (file.getName().equals(".svn")) {
 					boolean flag = file.delete();
 					System.out.println(file.getAbsolutePath() + "\t\t\t" + flag);
-				}else {
+				} else {
 					processDir(file);
 				}
 			}
 		}
 	}
-	
-	
+
 	public static void test62() {
 		String idfa = UUID.randomUUID().toString().toUpperCase();
 		System.out.println(idfa);
 	}
-	
+
 	public static void genUrl(String idfa) {
 		String idfv = UUID.randomUUID().toString().toUpperCase();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date d = new Date();
 		String date = sdf.format(d);
 		long ts = d.getTime();
-		
-		String checkUrl = String.format("curl -X POST 'http://idfa.trackingio.com/tkioIdfa' -d 'appid=1380567884&idfa=%s'",idfa);
-		
-		String install = String.format("curl -X POST 'https://log.reyun.com/receive/tkio/install' -H 'Content-Type: application/json;charset=UTF-8' -d '{\"appid\":\"6064e1008ce01581a8e25a14dad05d7a\",\"when\":\"%s\",\"what\":\"install\",\"context\":{\"modify\":\"0\",\"_carrier\":\"中国电信\",\"_lats\":\"1\",\"iad-attribution\":\"false\",\"_idfa\":\"%s\",\"_jbk\":\"1\",\"_lib_version\":\"1.3.0\",\"_app_version\":\"1.0.003\",\"_manufacturer\":\"苹果\",\"_timestamp\":\"%d\",\"_create_timestamp\":\"%d\",\"_rydevicetype\":\"iPhone\",\"_deviceid\":\"%s\",\"_sads\":\"1\",\"_tz\":\"+8\",\"_resolution\":\"667*375\",\"_pkgname\":\"com.tc.mhld\",\"_istf\":\"0\",\"_network_type\":\"WIFI\",\"_mac\":\"02:00:00:00:00:00\",\"_idfv\":\"%s\",\"_device_gps\":\"unknown\",\"frequency\":\"2.333\",\"_ryosversion\":\"11.0.3\",\"_campaignid\":\"test\",\"_model\":\"iPhone 6 (A1549\\/A1586)\",\"_ryos\":\"ios\"},\"who\":\"unknown\"}'",date,idfa,ts,ts,idfa,idfv);
+
+		String checkUrl = String
+				.format("curl -X POST 'http://idfa.trackingio.com/tkioIdfa' -d 'appid=1380567884&idfa=%s'", idfa);
+
+		String install = String.format(
+				"curl -X POST 'https://log.reyun.com/receive/tkio/install' -H 'Content-Type: application/json;charset=UTF-8' -d '{\"appid\":\"6064e1008ce01581a8e25a14dad05d7a\",\"when\":\"%s\",\"what\":\"install\",\"context\":{\"modify\":\"0\",\"_carrier\":\"中国电信\",\"_lats\":\"1\",\"iad-attribution\":\"false\",\"_idfa\":\"%s\",\"_jbk\":\"1\",\"_lib_version\":\"1.3.0\",\"_app_version\":\"1.0.003\",\"_manufacturer\":\"苹果\",\"_timestamp\":\"%d\",\"_create_timestamp\":\"%d\",\"_rydevicetype\":\"iPhone\",\"_deviceid\":\"%s\",\"_sads\":\"1\",\"_tz\":\"+8\",\"_resolution\":\"667*375\",\"_pkgname\":\"com.tc.mhld\",\"_istf\":\"0\",\"_network_type\":\"WIFI\",\"_mac\":\"02:00:00:00:00:00\",\"_idfv\":\"%s\",\"_device_gps\":\"unknown\",\"frequency\":\"2.333\",\"_ryosversion\":\"11.0.3\",\"_campaignid\":\"test\",\"_model\":\"iPhone 6 (A1549\\/A1586)\",\"_ryos\":\"ios\"},\"who\":\"unknown\"}'",
+				date, idfa, ts, ts, idfa, idfv);
 
 		System.out.println(idfa);
 		System.out.println();
@@ -362,9 +449,7 @@ public class Test {
 		System.out.println();
 		System.out.println(install);
 	}
-	
-	
-	
+
 	public static void test61() {
 		String target = "a,b,c,e";
 		String[] arr = target.split(",");
@@ -372,26 +457,27 @@ public class Test {
 		list.add("f");
 		System.out.println(list);
 	}
-	
+
 	public static void test60() throws IllegalAccessException, InvocationTargetException, InstantiationException {
-		Map<String,Object> map = new HashMap<>();
-		map.put("age",Integer.MAX_VALUE + "");
-		map.put("name","lu");
-		map.put("color_num","blue");
-		map.put("leg_num_size","5");
+		Map<String, Object> map = new HashMap<>();
+		map.put("age", Integer.MAX_VALUE + "");
+		map.put("name", "lu");
+		map.put("color_num", "blue");
+		map.put("leg_num_size", "5");
 		System.out.println(convertMap(map));
-		Cat cat = mapToObject(map,Cat.class);
+		Cat cat = mapToObject(map, Cat.class);
 		System.out.println(cat.toString());
 	}
-	
-	public static <T> T mapToObject(Map<String,? extends Object> map,Class<T> clz) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-		if(map == null)
+
+	public static <T> T mapToObject(Map<String, ? extends Object> map, Class<T> clz)
+			throws IllegalAccessException, InvocationTargetException, InstantiationException {
+		if (map == null)
 			return null;
 		T bean = clz.newInstance();
-		BeanUtils.populate(bean,map);
+		BeanUtils.populate(bean, map);
 		return bean;
 	}
-	
+
 	public static Map<String, ? extends Object> convertMap(Map<String, ? extends Object> map) {
 		if (map == null)
 			return null;
@@ -415,47 +501,49 @@ public class Test {
 		}
 		return result;
 	}
-	
+
 	public static void test59() {
-		FileUtil.scanFile("/work/dbs/result0322_2.csv",new FileProcesser() {
-			private Map<String,FWriter> map = new HashMap<>();
+		FileUtil.scanFile("/work/dbs/result0322_2.csv", new FileProcesser() {
+			private Map<String, FWriter> map = new HashMap<>();
+
 			@Override
 			public void process(String fileName, long lineNum, String line) {
 				String key = line;
 				String[] arr = line.split(",");
 				String intname = arr[0];
-				if(map.get(intname) == null) {
+				if (map.get(intname) == null) {
 					FWriter fw = new FWriter("/work/test/2019/0322/idfa_" + intname + ".csv");
 					fw.init();
 					map.put(intname, fw);
 				}
 				map.get(intname).writeLine(line);
 			}
+
 			@Override
 			public void end(String fileName, long totalNum) {
 				List<String> list = CollectionUtil.convertSetToList(map.keySet());
-				for(String item : list) {
+				for (String item : list) {
 					map.get(item).close();
 				}
 			}
 		});
 	}
-	
+
 	public static void test58() {
 		FWriter fw = new FWriter("/work/test/2019/0322/force.dat");
 		fw.init();
-		for(int i=0;i<10000;i++) {
+		for (int i = 0; i < 10000; i++) {
 			fw.writeLine(UUID.randomUUID().toString().toUpperCase());
 		}
 		fw.close();
 	}
-	
+
 	public static void test57() {
 		List<String> target = new ArrayList<>();
 		target.add("ee");
 		target.add("hh");
 		target.add("rewrewr");
-		
+
 		List<String> list1 = new ArrayList<>();
 		list1.add("aa");
 		list1.add("bb");
@@ -463,45 +551,45 @@ public class Test {
 		list1.add("dd");
 		list1.add("ee");
 		list1.add("ff");
-		
-		System.out.println(CollectionUtil.getIntersection(target,list1));
-		
+
+		System.out.println(CollectionUtil.getIntersection(target, list1));
+
 		System.out.println(target);
-		
+
 		System.out.println(list1);
 	}
-	
+
 	public static void test56() {
 		System.out.println(UUID.randomUUID().toString().toUpperCase());
 	}
-	
-	public static List<Integer> gen(int size){
+
+	public static List<Integer> gen(int size) {
 		List<Integer> result = new ArrayList<>();
 		Random rand = new SecureRandom();
 		int start = rand.nextInt(size);
-		int step = rand.nextInt(size/2);
+		int step = rand.nextInt(size / 2);
 		return null;
 	}
 
 	public static void test55() {
-		String key = UUID.randomUUID().toString().replaceAll("-","");
+		String key = UUID.randomUUID().toString().replaceAll("-", "");
 		System.out.println(key);
 		System.out.println(key.length());
-		
+
 		String s = "bf2c4a5b866543d7a526ccf8a2b6b066";
 		System.out.println(s.length());
 	}
-	
+
 	public static void test54() throws IOException {
 		File file = new File("/work/test/0109/bl_deviceid_rs.txt");
 		File out = new File("/work/test/0109/bl_deviceid_rs_out.txt");
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		BufferedWriter bw = new BufferedWriter(new FileWriter(out));
 		String line = null;
-		while((line = br.readLine()) != null) {
+		while ((line = br.readLine()) != null) {
 			int ind = line.indexOf(1);
-			line = ind > -1 ? line.substring(0,ind) : line;
-			if(line.length() > 30) {
+			line = ind > -1 ? line.substring(0, ind) : line;
+			if (line.length() > 30) {
 				bw.write(line);
 				bw.newLine();
 				bw.flush();
@@ -510,7 +598,7 @@ public class Test {
 		br.close();
 		bw.close();
 	}
-	
+
 	public static void test53() {
 		int a = -1000;
 		int b = 1000;
@@ -521,56 +609,57 @@ public class Test {
 		System.out.println(Integer.toBinaryString(-1));
 		System.out.println(Integer.toBinaryString(-2));
 		System.out.println(Integer.toBinaryString(-3));
-		
+
 		System.out.println(a >> 2);
-		System.out.println(a >>> 2 );
+		System.out.println(a >>> 2);
 	}
-	
+
 	public static void test52() {
-		List<String> list1 = new ArrayList<String>();  
-	    list1.add("A");  
-	    list1.add("B");  
-	  
-	    List<String> list2 = new ArrayList<String>();  
-	    list2.add("C");  
-	    list2.add("B");  
-	  
-	    // 2个集合的交集  
-	    list1.retainAll(list2);  
-	    System.out.println("交集:" + list1);  
+		List<String> list1 = new ArrayList<String>();
+		list1.add("A");
+		list1.add("B");
+
+		List<String> list2 = new ArrayList<String>();
+		list2.add("C");
+		list2.add("B");
+
+		// 2个集合的交集
+		list1.retainAll(list2);
+		System.out.println("交集:" + list1);
 	}
-	
+
 	public static void test51() {
 		String ss = "\"\\\"1994\\\",\\\"OPPO R11s\\\",\\\"218.98.32.136\\\",\\\"unknown\\\",\\\"null\\\",\\\"2018-12-11 21:39:19\\\",\\\"OPPO R11s\\\",\\\"7.1.1\\\",\\\"com.huanshou.taojj\\\"\"";
-		System.out.println(ss);		
-		ss = ss.replaceAll("^\"\\\\\"","").replaceAll("\\\\\"\"$","");
+		System.out.println(ss);
+		ss = ss.replaceAll("^\"\\\\\"", "").replaceAll("\\\\\"\"$", "");
 		System.out.println(ss);
 		String[] arr = ss.split("\\\\\",\\\\\"");
 		System.out.println(Arrays.toString(arr));
 		System.out.println(arr.length);
 	}
-	
+
 	public static void test50() {
 		long cur = System.currentTimeMillis();
-		for(int i=6;i<30;i++) {
+		for (int i = 6; i < 30; i++) {
 			System.out.println(new SimpleDateFormat("yyyy-MM-dd").format(new Date(cur - i * 24 * 60 * 60 * 1000L)));
 		}
 	}
-	
+
 	public static void test49() {
 		System.out.println(new Date().getTime());
 		System.out.println(System.currentTimeMillis());
-		
-		System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000)));
-		
+
+		System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+				.format(new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000)));
+
 		System.out.println(Long.MAX_VALUE);
 	}
-	
+
 	public static void test48() {
-//		SecureRandom secureRandom = new SecureRandom();
-//		System.out.println(secureRandom.nextInt(100));
+		// SecureRandom secureRandom = new SecureRandom();
+		// System.out.println(secureRandom.nextInt(100));
 		System.out.println(System.getProperty("java.security"));
-		
+
 		SecureRandom rand = new SecureRandom();
 		System.out.println(rand.getAlgorithm());
 		for (int k = 0; k < 20; k++) {
@@ -588,7 +677,7 @@ public class Test {
 			System.out.println(String.format("k=%d -- small=%d,large=%d", k, small, large));
 		}
 	}
-	
+
 	private static void saveRandom(Random rand) {
 		try {
 			ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream(new File("/work/test/1121/object")));
@@ -838,7 +927,7 @@ public class Test {
 		// } catch (InterruptedException e) {
 		// e.printStackTrace();
 		// }
-//		System.out.println(dogs.get(0));
+		// System.out.println(dogs.get(0));
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 			public void run() {
 				System.out.println("jvm shutdown");

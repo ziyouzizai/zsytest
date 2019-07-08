@@ -21,6 +21,10 @@ public class FWriter {
 		this.target = file;
 	}
 
+	public void flush() throws IOException {
+		bw.flush();
+	}
+	
 	public boolean init() {
 		if(target == null) 
 			return false;

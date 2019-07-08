@@ -62,7 +62,10 @@ public class FileUrlConvertUtils {
         try {
             URL url = new URL(fileUrl);
             conn = url.openConnection();
-
+            String contentType = conn.getHeaderField("Content-Type");
+            String server = conn.getHeaderField("server");
+            System.out.println(contentType);
+            System.out.println(server);
             in = new BufferedInputStream(conn.getInputStream());
 
             out = new ByteArrayOutputStream(1024);
@@ -116,6 +119,11 @@ public class FileUrlConvertUtils {
             conn.setRequestMethod("GET");
             conn.connect();
 
+            String contentType = conn.getHeaderField("Content-Type");
+            String server = conn.getHeaderField("server");
+            System.out.println(contentType);
+            System.out.println(server);
+            
             inStream = new BufferedInputStream(conn.getInputStream());
             outStream = new ByteArrayOutputStream();
 
@@ -151,6 +159,57 @@ public class FileUrlConvertUtils {
         return null;
     }
 
+    public static long downFromUrl(String fileUrl,String savePath) {
+    	BufferedInputStream inStream = null;
+        FileOutputStream outStream = null;
+        long b = 0;
+        try {
+
+            TrustManager[] tm = { new TrustAnyTrustManager() };
+            SSLContext sc = SSLContext.getInstance("SSL", "SunJSSE");
+            sc.init(null, tm, new java.security.SecureRandom());
+            URL console = new URL(fileUrl);
+
+            HttpsURLConnection conn = (HttpsURLConnection) console.openConnection();
+            conn.setSSLSocketFactory(sc.getSocketFactory());
+            conn.setHostnameVerifier(new TrustAnyHostnameVerifier());
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setRequestMethod("GET");
+            conn.connect();
+
+            inStream = new BufferedInputStream(conn.getInputStream());
+            outStream = new FileOutputStream(savePath);
+
+            byte[] buffer = new byte[1024];
+            int len = 0;
+            while ((len = inStream.read(buffer)) != -1) {
+                outStream.write(buffer, 0, len);
+                b += len;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (null != inStream) {
+                try {
+                    inStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (null != outStream) {
+                try {
+                	outStream.flush();
+                    outStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return b;
+    }
+    
     /**
      * 信任证书的管理器
      * @author Administrator
@@ -195,11 +254,7 @@ public class FileUrlConvertUtils {
     }
     
     public static void download2(String fileUrl,String filePathName) throws IOException {
-    	byte[] fileBytes = loadFileByteFromURL(fileUrl);
-    	File file = new File(filePathName);
-    	OutputStream output = new FileOutputStream(file);
-    	org.apache.commons.io.IOUtils.write(fileBytes, output);
-    	output.close();
+    	downFromUrl(fileUrl,filePathName);
     }
     
     public static String timestamps() {

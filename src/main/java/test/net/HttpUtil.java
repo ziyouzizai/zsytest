@@ -12,6 +12,8 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -41,7 +43,21 @@ import test.others.MD5Utils;
  *
  */
 public class HttpUtil {
-
+//	final private static Pattern pat = Pattern.compile("(ht|f)tp(s?)\\:\\/\\/[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])*(:(0-9)*)*(\\/?)([a-zA-Z0-9\\-\\.\\?\\,\\'\\/\\\\\\+&amp;%\\$#_]*)?");//对比
+	
+//	final private static Pattern pat = Pattern.compile("(https{0,1})\\:\\/\\/[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])*(:(0-9)*)*(\\/?)([a-zA-Z0-9\\-\\.\\?\\,\\'\\/\\\\\\+&amp;%\\$#_]*)?");//对比
+	
+//	final private static Pattern pat = Pattern.compile("^((https|http|ftp|rtsp|mms)?://)" 
+//		     + "+(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?" 
+//		     + "(([0-9]{1,3}\\.){3}[0-9]{1,3}" 
+//		     + "|" 
+//		     + "([0-9a-z_!~*'()-]+\\.)*" 
+//		     + "([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\\." 
+//		     + "[a-z]{2,6})" 
+//		     + "(:[0-9]{1,4})?" 
+//		     + "((/?)|" 
+//		     + "(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$");
+	
 	private static final String DEFAULT_CHARSET = "UTF-8";
 
 	private static final String _GET = "GET"; // GET
@@ -148,7 +164,7 @@ public class HttpUtil {
 	 * @return 返回类型:
 	 * @throws Exception
 	 */
-	public static String get(String url, Map<String, String> params, Map<String, String> headers) throws Exception {
+	public static String get(String url, Map<String, String> params, Map<String, String> headers) throws Throwable {
 		HttpURLConnection http = null;
 		if (isHttps(url)) {
 			http = initHttps(initParams(url, params), _GET, headers);
@@ -183,6 +199,25 @@ public class HttpUtil {
 		return false;
 	}
 	
+	public static boolean isHttpUrl(String urls) {
+        boolean isurl = false;
+//        String regex = "(((https|http)?://)?([a-z0-9]+[.])|(www.))"
+//            + "\\w+[.|\\/]([a-z0-9]{0,})?[[.]([a-z0-9]{0,})]+((/[\\S&&[^,;\u4E00-\u9FA5]]+)+)?([.][a-z0-9]{0,}+|/?)";//设置正则表达式
+ 
+        String reg = "(http[s]{0,1})\\:\\/\\/[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])*(:(0-9)*)*(\\/?)([a-zA-Z0-9\\-\\.\\?\\,\\'\\/\\\\\\+&amp;%\\$#_]*)?";
+//        Pattern pat = Pattern.compile("(http[s]{0,1})\\:\\/\\/[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])*(:(0-9)*)*(\\/?)([a-zA-Z0-9\\-\\.\\?\\,\\'\\/\\\\\\+&amp;%\\$#_]*)?");//对比
+//        System.out.println("here");
+//        Matcher mat = pat.matcher(urls.trim());
+//        isurl = mat.matches();//判断是否匹配
+        
+        isurl = Pattern.matches(reg,urls.trim());
+        
+        if (isurl) {
+            isurl = true;
+        }
+        return isurl;
+    }
+
 	public static String getWithJudge(String url) throws Exception {
 		HttpURLConnection http = null;
 		if (isHttps(url)) {
@@ -190,9 +225,6 @@ public class HttpUtil {
 		} else {
 			http = initHttp(initParams(url, null), _GET, null);
 		}
-		String response = http.getResponseMessage();
-		System.out.println(http.getHeaderFields());
-		System.out.println(http.getHeaderField("Content-Type"));
 		InputStream in = http.getInputStream();
 		BufferedReader read = new BufferedReader(new InputStreamReader(in, DEFAULT_CHARSET));
 		String valueString = null;
@@ -207,11 +239,11 @@ public class HttpUtil {
 		return bufferRes.toString();
 	}
 
-	public static String get(String url) throws Exception {
+	public static String get(String url) throws Throwable {
 		return get(url, null);
 	}
 
-	public static String get(String url, Map<String, String> params) throws Exception {
+	public static String get(String url, Map<String, String> params) throws Throwable {
 		return get(url, params, null);
 	}
 
@@ -309,21 +341,9 @@ public class HttpUtil {
 	}
 
 	public static void main(String[] args) throws Exception {
-		String url = "http://sdkv4test.qcwanwan.com/api/v1.0/cp/device/check";
-		String params = "app_id=99&apple_id=222222&idfa=i1111,i2222";
-		String signkey = "sign_key=27b758d2cb990f2f7ccd8c3a47b88df7";
-		String sign = MD5Utils.MD5Encode(params + "&" + signkey);
-		System.out.println(params + "&" + signkey);
-
-		params = params + "&" + signkey + "&sign=" + sign;
-
-		System.out.println(params);
-		String result = HttpUtil.post(url, params);
-
-		System.out.println(result);
-
-		System.out.println(
-				MD5Utils.MD5Encode("app_id=99&apple_id=222222&idfa=i1111&sign_key=27b758d2cb990f2f7ccd8c3a47b88df7"));
+		String url = "https://file.wikileaks.org/file/budapest-gay-rights-riot-2008/http://wikileaks.org";
+//		String url = "https://file.wikileaks.org/file/budapest-gay-rights-riot-2008";
+		System.out.println(HttpUtil.isHttpUrl(url));
 	}
 }
 
